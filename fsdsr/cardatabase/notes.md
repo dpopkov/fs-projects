@@ -30,3 +30,9 @@
   spring.jpa.generate-ddl=true
   spring.jpa.hibernate.ddl-auto=update
   ```
+
+### 4 - Creating a RESTful Web Service
+
+- Create `CarController` with `@GetMapping("/cars")`
+- To avoid problems with infinite serialization add ignoring:
+  - `@JsonIgnore var cars: List<Car>`
