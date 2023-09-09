@@ -17,6 +17,15 @@ class CardatabaseApplication(
     private val logger = LoggerFactory.getLogger(this::class.java)
 
     override fun run(vararg args: String?) {
+        if (carRepository.count() == 0L) {
+            logger.debug("no cars found, populating")
+            populateCars()
+        } else {
+            logger.debug("cars found, not populating")
+        }
+    }
+
+    private fun populateCars() {
         val owners = listOf(
             Owner(firstname = "Jane", lastname = "Doe"),
             Owner(firstname = "Jack", lastname = "Sparrow"),
@@ -25,7 +34,7 @@ class CardatabaseApplication(
         val data = initialData(owners)
         carRepository.saveAll(data)
         logger.debug("saved initial data (${data.size} items)")
-        for(car in carRepository.findAll()) {
+        for (car in carRepository.findAll()) {
             logger.info("brand: {}, model: {}", car.brand, car.model)
         }
     }
