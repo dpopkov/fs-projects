@@ -36,3 +36,8 @@
 - Create `CarController` with `@GetMapping("/cars")`
 - To avoid problems with infinite serialization add ignoring:
   - `@JsonIgnore var cars: List<Car>`
+- Use Spring Data REST (creates web services for entities automatically):
+  - add dependency `org.springframework.boot:spring-boot-starter-data-rest`
+  - config base path:
+    - `spring.data.rest.basePath=/api` - NOT working!
+    - add `SpringDataRestConfig` with `config.setBasePath("/api")` - it works ok.

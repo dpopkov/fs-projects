@@ -1,0 +1,17 @@
+spring:
+  application:
+    name: cardatabase
+  datasource:
+    url: jdbc:postgresql://localhost:5432/fsdsr-cardb
+    username: postgres
+    password: fsdsr-cardb-pass
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    generate-ddl: true
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+
+logging:
+  level:
+    learn.fsdsr.cardatabase: DEBUG
