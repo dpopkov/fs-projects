@@ -63,3 +63,6 @@
   - Go to `http://localhost:8080/api` and behold login page.
   - Enter `user` and generated password.
   - Enjoy Basic Authentication.
+- Add configuration in `SecurityConfig`
+  - Add in-memory user in `userDetailsService()`
+  - Run the app and use in-memory user.
