@@ -66,3 +66,14 @@
 - Add configuration in `SecurityConfig`
   - Add in-memory user in `userDetailsService()`
   - Run the app and use in-memory user.
+- Implement getting users from database:
+  - create `AppUser` entity and `AppUserRepository`
+    - with `findByUsername(username: String)` for authentication process
+  - create `UserDetailsServiceImpl` to get user details from database user.
+- Modify `SecurityConfig` to disable in-memory users and enable users from database
+  - delete `userDetailsService()`
+  - use `UserDetailsServiceImpl`
+  - add `configureGlobal(auth)` to use `userDetailsService`
+- Save test users with hashed passwords in CommandLineRunner
+- Disable access to the generated URL `api/appUsers`:
+  - by setting `@RepositoryRestResource(exported = false)` on AppUserRepository

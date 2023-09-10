@@ -1,9 +1,6 @@
 package learn.fsdsr.cardatabase
 
-import learn.fsdsr.cardatabase.domain.Car
-import learn.fsdsr.cardatabase.domain.CarRepository
-import learn.fsdsr.cardatabase.domain.Owner
-import learn.fsdsr.cardatabase.domain.OwnerRepository
+import learn.fsdsr.cardatabase.domain.*
 import org.slf4j.LoggerFactory
 import org.springframework.boot.CommandLineRunner
 import org.springframework.boot.autoconfigure.SpringBootApplication
@@ -13,6 +10,7 @@ import org.springframework.boot.runApplication
 class CardatabaseApplication(
     private val carRepository: CarRepository,
     private val ownerRepository: OwnerRepository,
+    private val appUserRepository: AppUserRepository,
 ) : CommandLineRunner {
     private val logger = LoggerFactory.getLogger(this::class.java)
 
@@ -23,6 +21,25 @@ class CardatabaseApplication(
         } else {
             logger.debug("cars found, not populating")
         }
+        if (appUserRepository.count() == 0L) {
+            logger.debug("no test users found, populating")
+            populateUsers()
+        } else {
+            logger.debug("test users found, not populating")
+        }
+    }
+
+    fun populateUsers() {
+        appUserRepository.save(AppUser(
+            username = "user",
+            password = "$2y$10\$CZ22MudZ909OZxpoEj7Mde8UhKujnfP0X73tb5tsLRZHzuP0xmEPW",
+            role = "USER"
+        ))
+        appUserRepository.save(AppUser(
+            username = "admin",
+            password = "$2y$10\$E1c1v/XGsatv7FsMjGKEuepRuUiTwGIYA3ssy/gsZDjvBhuG6XhFq",
+            role = "ADMIN"
+        ))
     }
 
     private fun populateCars() {
