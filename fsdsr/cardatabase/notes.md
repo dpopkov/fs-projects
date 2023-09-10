@@ -52,3 +52,14 @@
   - make configuration in `OpenApiConfig`
   - add OpenAPI configuration in application.properties
   - run and go to `http://localhost:8080/swagger-ui.html`
+
+### 5 - Add Spring Security
+
+- Add default Spring Security
+  - Add dependencies:
+    - `org.springframework.boot:spring-boot-starter-security`
+    - `org.springframework.security:spring-security-test`
+  - Run the app and behold generated user password.
+  - Go to `http://localhost:8080/api` and behold login page.
+  - Enter `user` and generated password.
+  - Enjoy Basic Authentication.
