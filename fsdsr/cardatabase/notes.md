@@ -41,3 +41,14 @@
   - config base path:
     - `spring.data.rest.basePath=/api` - NOT working!
     - add `SpringDataRestConfig` with `config.setBasePath("/api")` - it works ok.
+- Documenting automatically with OpenAPI 
+  - add dependency `org.springdoc:springdoc-openapi-starter-webmvc-ui:2.0.4`
+    - Versioning issues: 
+      - version 2.0.2 fails with "Failed to load API definition" message and NPE somewhere in `org.springdoc.core.data.DataRestOperationService`.
+      - version 2.0.4 with Spring Boot 3.1.4 and spring.dependency-management 1.1.3 is OK.
+      - version 2.0.4 with Spring Boot 3.3.7 and spring.dependency-management 1.1.7 FAILS.
+      - versions 2.6.0 and 2.7.0 with Spring Boot 3.3.7 FAILS.
+      - version 2.6.3 with Spring Boot 3.4.2 works but with exceptions in `io.swagger.v3.core`
+  - make configuration in `OpenApiConfig`
+  - add OpenAPI configuration in application.properties
+  - run and go to `http://localhost:8080/swagger-ui.html`

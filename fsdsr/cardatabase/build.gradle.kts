@@ -2,8 +2,10 @@ plugins {
 	kotlin("jvm") version "1.9.25"
 	kotlin("plugin.spring") version "1.9.25"
 	kotlin("plugin.jpa") version "1.9.25"
-	id("org.springframework.boot") version "3.3.7"
-	id("io.spring.dependency-management") version "1.1.7"
+//	id("org.springframework.boot") version "3.3.7"
+	id("org.springframework.boot") version "3.1.4"
+//	id("io.spring.dependency-management") version "1.1.7"
+	id("io.spring.dependency-management") version "1.1.3"
 }
 
 group = "learn.fsdsr"
@@ -23,6 +25,8 @@ dependencies {
 	implementation("org.springframework.boot:spring-boot-starter-web")
 	implementation("org.springframework.boot:spring-boot-starter-data-jpa")
 	implementation("org.springframework.boot:spring-boot-starter-data-rest")
+	implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.0.4")
+//	implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.8.3")
 	implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
 	implementation("org.jetbrains.kotlin:kotlin-reflect")
 	developmentOnly("org.springframework.boot:spring-boot-devtools")
