@@ -6,5 +6,9 @@ import java.util.Optional
 
 @RepositoryRestResource(exported = false)
 interface AppUserRepository : CrudRepository<AppUser, Long> {
+    /**
+     * Find a user by the specified username from the database
+     * in the authentication process.
+     */
     fun findByUsername(username: String): Optional<AppUser>
 }

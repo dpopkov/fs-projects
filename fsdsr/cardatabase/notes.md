@@ -77,3 +77,24 @@
 - Save test users with hashed passwords in CommandLineRunner
 - Disable access to the generated URL `api/appUsers`:
   - by setting `@RepositoryRestResource(exported = false)` on AppUserRepository
+- Switch from Basic Authentication to JSON Web Token
+  - Add dependencies for `jjwt`
+    - `implementation("io.jsonwebtoken:jjwt-api:0.11.5")`
+    - `runtimeOnly("io.jsonwebtoken:jjwt-impl:0.11.5")`
+    - `runtimeOnly("io.jsonwebtoken:jjwt-jackson:0.11.5")`
+- Secure the login
+  - Add `JwtService`
+    - generate a signed JWT
+    - get a token from the auth header
+  - Add `AccountCredentials` to store credentials for authentication
+  - Add `LoginController`
+    - use JwtService and AuthenticationManager
+    - generate token and send it in the response Authorization header
+  - Configure security in `SecurityConfig`: 
+    - add `AuthenticationManager` bean
+    - implement `filterChain` method:
+      - never create session and therefore disable csrf
+      - allow POST to `/login`
+      - authenticate all others
+  - Run and go to `http://localhost:8080/login` with username and password in json body
+    - behold the signed jwt in the response Authorization header
