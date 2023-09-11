@@ -1,5 +1,6 @@
 package learn.fsdsr.cardatabase.config
 
+import learn.fsdsr.cardatabase.AuthenticationFilter
 import learn.fsdsr.cardatabase.service.UserDetailsServiceImpl
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
@@ -13,11 +14,13 @@ import org.springframework.security.config.http.SessionCreationPolicy
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
 import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.security.web.SecurityFilterChain
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter
 
 @Configuration
 @EnableWebSecurity
 class SecurityConfig(
-    val userDetailsService: UserDetailsServiceImpl
+    val userDetailsService: UserDetailsServiceImpl,
+    val authenticationFilter: AuthenticationFilter,
 ) {
     fun configureGlobal(auth: AuthenticationManagerBuilder) {
         auth.userDetailsService(userDetailsService)
@@ -40,7 +43,7 @@ class SecurityConfig(
         }.authorizeHttpRequests {
             it.requestMatchers(HttpMethod.POST, "/login").permitAll()
                 .anyRequest().authenticated()
-        }
+        }.addFilterBefore(authenticationFilter, UsernamePasswordAuthenticationFilter::class.java)
         return http.build()
     }
 }

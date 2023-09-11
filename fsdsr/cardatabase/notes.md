@@ -96,5 +96,11 @@
       - never create session and therefore disable csrf
       - allow POST to `/login`
       - authenticate all others
-  - Run and go to `http://localhost:8080/login` with username and password in json body
+  - Run and POST to `http://localhost:8080/login` with username and password in json body
     - behold the signed jwt in the response Authorization header
+- Secure other requests
+  - implement `AuthenticationFilter`
+  - inject `AuthenticationFilter` to `SecurityConfig`
+    - add the filter in `filterChain`
+  - Run and POST to `http://localhost:8080/login` with credentials, get the token in the response Authorization header.
+  - Use the token in all other requests.
