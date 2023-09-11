@@ -104,3 +104,10 @@
     - add the filter in `filterChain`
   - Run and POST to `http://localhost:8080/login` with credentials, get the token in the response Authorization header.
   - Use the token in all other requests.
+- Handle exceptions
+  - implement `AuthEntryPoint`
+  - inject it in `SecurityConfig` 
+    - config exception handling in `filterChain`
+  - try to go to any url w/o authentication
+    - behold `401 Unauthorized` error with body `Error: Full authentication is required to access this resource`
+  - get a fresh token at `/login`, then enjoy authenticated requests

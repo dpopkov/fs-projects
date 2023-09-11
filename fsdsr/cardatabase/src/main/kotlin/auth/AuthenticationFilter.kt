@@ -1,4 +1,4 @@
-package learn.fsdsr.cardatabase
+package learn.fsdsr.cardatabase.auth
 
 import jakarta.servlet.FilterChain
 import jakarta.servlet.http.HttpServletRequest

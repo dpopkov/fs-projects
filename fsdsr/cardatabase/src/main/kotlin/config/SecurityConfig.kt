@@ -1,6 +1,7 @@
 package learn.fsdsr.cardatabase.config
 
-import learn.fsdsr.cardatabase.AuthenticationFilter
+import learn.fsdsr.cardatabase.auth.AuthEntryPoint
+import learn.fsdsr.cardatabase.auth.AuthenticationFilter
 import learn.fsdsr.cardatabase.service.UserDetailsServiceImpl
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
@@ -21,6 +22,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 class SecurityConfig(
     val userDetailsService: UserDetailsServiceImpl,
     val authenticationFilter: AuthenticationFilter,
+    val exceptionHandler: AuthEntryPoint,
 ) {
     fun configureGlobal(auth: AuthenticationManagerBuilder) {
         auth.userDetailsService(userDetailsService)
@@ -43,7 +45,12 @@ class SecurityConfig(
         }.authorizeHttpRequests {
             it.requestMatchers(HttpMethod.POST, "/login").permitAll()
                 .anyRequest().authenticated()
-        }.addFilterBefore(authenticationFilter, UsernamePasswordAuthenticationFilter::class.java)
+        }.addFilterBefore(
+            authenticationFilter,
+            UsernamePasswordAuthenticationFilter::class.java
+        ).exceptionHandling {
+            it.authenticationEntryPoint(exceptionHandler)
+        }
         return http.build()
     }
 }
