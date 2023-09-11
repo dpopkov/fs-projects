@@ -111,3 +111,6 @@
   - try to go to any url w/o authentication
     - behold `401 Unauthorized` error with body `Error: Full authentication is required to access this resource`
   - get a fresh token at `/login`, then enjoy authenticated requests
+- Add CORS filter
+  - add `CorsConfigurationSource` bean to `SecurityConfig`
+  - configure cors in `filterChain`
