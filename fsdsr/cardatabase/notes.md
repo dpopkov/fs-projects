@@ -114,3 +114,15 @@
 - Add CORS filter
   - add `CorsConfigurationSource` bean to `SecurityConfig`
   - configure cors in `filterChain`
+
+### 6 - Testing Backend
+
+- Ensure dependencies:
+  - `testImplementation("org.springframework.boot:spring-boot-starter-test")`
+  - `testRuntimeOnly("com.h2database:h2")`
+- Add JPA tests:
+  - create `OwnerRepositoryTest` with `@DataJpaTest`
+    - When using this annotation, the H2 database and Spring Data are automatically configured for testing
+  - add save and delete tests
+- Add `CarControllerTest` with `@AutoConfigureMockMvc` 
+  - this test needs running postgres (fix it)
