@@ -126,3 +126,8 @@
   - add save and delete tests
 - Add `CarControllerTest` with `@AutoConfigureMockMvc` 
   - this test needs running postgres (fix it)
+
+### 12 - Setting Up the Frontend
+
+- Prepare the backend
+  - Make unsecure config to start frontend development

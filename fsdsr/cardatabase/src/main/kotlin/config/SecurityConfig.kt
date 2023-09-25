@@ -42,6 +42,16 @@ class SecurityConfig(
 
     @Bean
     fun filterChain(http: HttpSecurity): SecurityFilterChain {
+        /* Temporary version of unsecure config */
+        http.csrf {
+            it.disable()
+        }.cors(
+            Customizer.withDefaults()
+        ).authorizeHttpRequests {
+            it.anyRequest().permitAll()
+        }
+
+        /*
         http.csrf {
             it.disable()
         }.cors(
@@ -57,6 +67,7 @@ class SecurityConfig(
         ).exceptionHandling {
             it.authenticationEntryPoint(exceptionHandler)
         }
+        */
         return http.build()
     }
 
