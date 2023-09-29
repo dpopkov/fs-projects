@@ -5,6 +5,10 @@ import {
   Toolbar,
   Typography,
 } from '@mui/material';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import Carlist from './components/Carlist';
+
+const queryClient = new QueryClient();
 
 function App() {
   return (
@@ -15,6 +19,9 @@ function App() {
           <Typography variant="h6">Car Shop</Typography>
         </Toolbar>
       </AppBar>
+      <QueryClientProvider client={queryClient}>
+        <Carlist />
+      </QueryClientProvider>
     </Container>
   );
 }
