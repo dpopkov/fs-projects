@@ -7,6 +7,8 @@ import {
   GridToolbar,
 } from '@mui/x-data-grid';
 import { Snackbar } from '@mui/material';
+import IconButton from '@mui/material/IconButton';
+import DeleteIcon from '@mui/icons-material/Delete';
 import { getCars, deleteCar } from '../api/carapi';
 import AddCar from './AddCar';
 import EditCar from './EditCar';
@@ -55,7 +57,9 @@ function Carlist() {
       filterable: false,
       disableColumnMenu: true,
       renderCell: (params: GridCellParams) => (
-        <button
+        <IconButton
+          aria-label="delete"
+          size="small"
           onClick={() => {
             const msg = `Are you sure you want to delete ${params.row.brand} ${params.row.model}?`;
             if (window.confirm(msg)) {
@@ -63,8 +67,8 @@ function Carlist() {
             }
           }}
         >
-          Delete
-        </button>
+          <DeleteIcon fontSize="small" />
+        </IconButton>
       ),
     },
   ];
