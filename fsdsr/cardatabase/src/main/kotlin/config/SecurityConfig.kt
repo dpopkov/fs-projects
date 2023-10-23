@@ -62,6 +62,8 @@ class SecurityConfig(
             it.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
         }.authorizeHttpRequests {
             it.requestMatchers(HttpMethod.POST, "/login").permitAll()
+                .requestMatchers("/api/**").authenticated()
+                .requestMatchers(HttpMethod.GET, "/**").permitAll()
                 .anyRequest().authenticated()
         }.addFilterBefore(
             authenticationFilter,

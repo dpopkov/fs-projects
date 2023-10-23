@@ -1,0 +1,30 @@
+version: '3'
+services:
+  app:
+    image: cardatabase:0.0.1-SNAPSHOT
+    ports:
+      - "8080:8080"
+    depends_on:
+      psql:
+        condition: service_healthy
+  psql:
+    image: postgres:14.7
+    container_name: fsdsr-postgresql
+    volumes:
+      - postgres_fsdsr_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    expose:
+      - "5432"
+    environment:
+      POSTGRES_PASSWORD: fsdsr-cardb-pass
+      POSTGRES_USER: postgres
+      POSTGRES_DB: fsdsr-cardb
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  postgres_fsdsr_data:
