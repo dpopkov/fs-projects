@@ -1,3 +1,5 @@
+import org.gradle.api.tasks.testing.logging.TestExceptionFormat
+
 plugins {
 	kotlin("jvm") version "1.9.25"
 	kotlin("plugin.spring") version "1.9.25"
@@ -35,4 +37,14 @@ kotlin {
 
 tasks.withType<Test> {
 	useJUnitPlatform()
+
+	// Настройка логирования тестов
+	testLogging {
+		events("passed", "skipped", "failed") // выводит UsersApplicationTests > contextLoads() PASSED
+		showExceptions = true
+		exceptionFormat = TestExceptionFormat.FULL
+		showCauses = true
+		showStackTraces = true
+		showStandardStreams = false
+	}
 }
