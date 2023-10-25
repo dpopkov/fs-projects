@@ -14,7 +14,7 @@ tasks.withType<Test> {
 }
 ```
 
-# Controller
+## Controller
 
 #### Using @get:GetMapping на свойстве
 
@@ -57,3 +57,10 @@ val all: Collection<User>
 #### Run application with Gradle
 
 - `./gradlew bootRun`
+
+
+# Application Boards
+
+#### Run application with --debug
+
+`./gradlew bootRun --debug`
